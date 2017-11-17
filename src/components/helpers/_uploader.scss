@@ -1,0 +1,132 @@
+.uploader {
+    text-align: center;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
+    & input[type="file"] {
+        display: none;
+    }
+
+    i {
+        width: 100%;
+        font-size: 3em;
+        cursor: pointer;
+    }
+
+    &-title {
+        text-transform: uppercase;
+        text-shadow: 1px 0 0 $primary-color;
+        width: 100%;
+        font: {
+            size: 1.3em;
+        }
+    }
+
+    .form-upload {
+        width: 100%;
+
+        &__teacher {
+            padding: 0.3em;
+            margin: 1em 0;
+            border: 1px solid rgba($secondary-color, .8);
+        }
+
+        &__what {
+            width: 100%;
+            margin-bottom: .5em;
+            font: {
+                size: .9em;
+            }
+        }
+
+        &__type {
+            width: 40%;
+            margin-bottom: 1.5em;
+            font: {
+                size: .9em;
+            }
+        }
+
+        &__period {
+            width: 40%;
+            margin-bottom: 1.5em;
+            font: {
+                size: .9em;
+            }
+        }
+
+    }
+}
+
+.download-container {
+    margin: 0 auto;
+    width: 50%;
+    padding: .5em .3em;
+    text-align: center;
+
+    .download-img {
+        width: 80px;
+        margin-bottom: .3em ;
+    }
+
+    .download {
+        text-transform: uppercase;
+
+        &-name {
+            color: green;
+            margin:  0 0 .3em 0;
+        }
+    }
+}
+
+.close {
+  font-size: 1.5em;
+  color: white;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.form-submit {
+  border: 1px solid $primary-color;
+  color: white;
+  background: green;
+  padding: 0.3em;
+  margin: 0.5em;
+  font: {
+    family: $font-text;
+    size: 1em;
+  }
+}
+
+input {
+  outline-color: green;
+}
+
+select {
+  padding: 0.3em;
+
+  & option {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  }
+}
+
+
+.uploader-update {
+  background: rgba($secondary-color, .8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: auto;
+  display: none;
+
+  .main-nav__icon {
+      width: 40px;
+      height: 40px;
+  }
+}

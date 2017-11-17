@@ -1,0 +1,44 @@
+.header {
+    top: 0;
+    left: 0;
+    height: 40vh;
+    padding: 2em;
+    background-image: url('./assets/img/fond.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    &-logo {
+        
+        &__img {
+            width: 130px;
+            margin-bottom: .5em;
+        }
+    }
+
+    &-text {
+        width: 100%;
+        color: rgba($font-color, .8);
+        margin-bottom: 1em;
+        text-transform: uppercase;
+        font: {
+            size: .7em;
+            family: $font-text;
+        }
+    }
+
+    &-title {
+        width: 100%;
+        letter-spacing: 1px;
+        text-shadow: 2px 1px 0 rgba($font-color, .8);
+        margin-bottom: .5em;
+        color: $primary-color;
+        font: {
+            size: 2.2em;
+            family: $font-title;
+        }
+    }
+}

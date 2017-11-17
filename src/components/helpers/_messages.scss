@@ -1,0 +1,21 @@
+.message {
+    margin: 0.5em auto;
+    padding: 0.5em;
+    font-size: 1em;
+    text-align: center;
+    width: 100%;
+
+    &-error {
+        @extend .message;
+        background: rgba($error-color, .5);
+        border-top: 2px solid $error-color;
+        border-bottom: 2px solid $error-color;
+    }
+
+    &-success {
+        @extend .message;
+        background: rgba($success-color, .5);
+        border-top: 2px solid $success-color;
+        border-bottom: 2px solid $success-color;
+    } 
+}

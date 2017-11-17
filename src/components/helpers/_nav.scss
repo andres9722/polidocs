@@ -1,0 +1,47 @@
+.main-nav {
+    background: rgba($primary-color, 1);
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    text-transform: uppercase;
+
+    button {
+        border: 0;
+        
+    }
+
+    &__title {
+        cursor: pointer;
+        color: $white;
+        padding: 0.5em 1em;
+        height: 100%;
+        text-shadow: 0 1px 0 rgba($font-color, .7);
+
+        font: {
+            size: 1em;
+            family: $font-text;
+            weight: 200;
+        }
+    }
+
+    .timeline-button {
+        width: 100%;
+        & .active {
+            border-bottom: 3px solid $white;
+        }
+    }
+
+    .subjects-button {
+        width: 100%;
+        & .active {
+            border-bottom: 3px solid $white;
+        }
+    }
+
+    .profile-button {
+        width: 100%;
+        &.active {
+            border-bottom: 3px solid $white;
+        }
+    }
+}

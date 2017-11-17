@@ -1,0 +1,59 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    
+  }
+}
+
+.u-show {
+  display: block;
+  transition: all 400ms ease;
+}
+
+.u-hide {
+  display: none;
+  opacity: 0;
+}
+
+.u-fadein {
+  animation: fadeIn 400ms;
+}
+
+.active {
+  border: 1px solid red;
+}
+
+.u-fixed {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  padding: .5rem;
+  height: 3rem;
+  width: 100%;
+  color: red;
+}
+
+.u-offline {
+  background: #999;
+  color: white;
+  filter: blur(.1rem);
+}
+
+.content {
+  padding: .3em 1em;
+
+  &-section {
+    height: auto;
+    width: 100%;
+  }
+}
+
+
+
+

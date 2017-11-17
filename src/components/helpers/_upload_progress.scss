@@ -1,0 +1,18 @@
+.progress {
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &-bar {
+        width: 50%;
+    }
+
+    &-advance {
+        font: {
+            size: 1.3em;
+        }
+    }
+}
