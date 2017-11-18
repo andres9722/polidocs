@@ -1,10 +1,9 @@
 import firebase from 'firebase'
 import uploader from './uploader'
-import book from "../assets/img/png/diploma.png";
+import book from "../assets/img/svg/learning.svg";
 
 const timeline = () => {
     const d = document, c = console.log
-
 
     const timelineScripts = setInterval(() => {
         if(d.readyState === 'complete') {
@@ -13,15 +12,17 @@ const timeline = () => {
             const timelineArchives = d.querySelector('.timeline-archives')
             function ArchiveTemplate(obj) {
               return `
-                <div class="subjects-content">
-                  <img src="${book}" class="subjects-content__img">
-                  <p class="profile-archives__name subjects-content__name"> ${obj.fileName} </p>
-                  <a class="fa fa-download profile-archives__download subjects-content__name" href="${obj.archiveURL}" download>  </a>
-                  <p class="profile-archives__date subjects-content__date"> Fecha de subida: ${obj.dateUpload} </p>
-                  <p class="profile-archives__date subjects-content__date"> Autor de subida: ${obj.displayName} </p>
-                  <p class="profile-archives__date subjects-content__date"> Asignatura: ${obj.subject} </p>
-                  <p class="profile-archives__date subjects-content__date"> Profesor: ${obj.teacher} </p>
-                  <p class="profile-archives__date subjects-content__date"> Tipo: ${obj.type} </p>
+                <div class="archives-content">
+                  <img src="${book}" class="archives-content__img">
+                  <p class="subjects-content__name"> ${obj.fileName} </p>
+                  <div class="archives-content__actions">
+                    <a class="profile-archives__download" href="${obj.archiveURL}" download>  </a>
+                  </div>
+                  <p class="archives-content__date"> Fecha de subida: ${obj.dateUpload} </p>
+                  <p class="archives-content__date"> Autor de subida: ${obj.displayName} </p>
+                  <p class="archives-content__date"> Asignatura: ${obj.subject} </p>
+                  <p class="archives-content__date"> Profesor: ${obj.teacher} </p>
+                  <p class="archives-content__date"> Tipo: ${obj.type} </p>
                 </div>
               `
             }

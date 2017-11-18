@@ -1,5 +1,5 @@
 .message {
-    margin: 0.5em auto;
+    margin: 0.5em 0;
     padding: 0.5em;
     font-size: 1em;
     text-align: center;
@@ -17,5 +17,5 @@
         background: rgba($success-color, .5);
         border-top: 2px solid $success-color;
         border-bottom: 2px solid $success-color;
-    } 
+    }
 }

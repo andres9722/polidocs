@@ -1,47 +1,22 @@
 .main-nav {
-    background: rgba($primary-color, 1);
-    display: flex;
-    justify-content: space-between;
-    padding: 0;
-    text-transform: uppercase;
+  background: $primary-color;
+  display: flex;
+  border-top: 1px solid $secondary-color;
+  border-bottom: 1px solid $secondary-color;
+  max-width: 100%;
 
-    button {
-        border: 0;
-        
+  .timeline-button, .subjects-button, .profile-button {
+    width: 100%;
+    border: 0;
+  }
+
+  &__name {
+    color: $white;
+    padding: 0.3em 1em;
+
+    font: {
+      family: $font-text;
+      weight: 200;
     }
-
-    &__title {
-        cursor: pointer;
-        color: $white;
-        padding: 0.5em 1em;
-        height: 100%;
-        text-shadow: 0 1px 0 rgba($font-color, .7);
-
-        font: {
-            size: 1em;
-            family: $font-text;
-            weight: 200;
-        }
-    }
-
-    .timeline-button {
-        width: 100%;
-        & .active {
-            border-bottom: 3px solid $white;
-        }
-    }
-
-    .subjects-button {
-        width: 100%;
-        & .active {
-            border-bottom: 3px solid $white;
-        }
-    }
-
-    .profile-button {
-        width: 100%;
-        &.active {
-            border-bottom: 3px solid $white;
-        }
-    }
+  }
 }

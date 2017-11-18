@@ -1,58 +1,45 @@
-import firebase from "firebase";
-import uploader from "./uploader";
-import { signOut } from "./auth";
-import {
-  progressBar,
-  progressStatus,
-  showProgress,
-  hideProgress
-} from "./upload_progress";
-import { createCustomElement, printModal, removeModal } from "./modal";
-import book from "../assets/img/png/diploma.png";
+import firebase from "firebase"
+import uploader from "./uploader"
+import { signOut } from "./auth"
+import { progressBar, progressStatus, showProgress, hideProgress } from "./upload_progress"
+import { createCustomElement, printModal, removeModal } from "./modal"
+import book from "../assets/img/svg/chemistry.svg"
 
 const profile = () => {
   const d = document,
     c = console.log,
     user = firebase.auth().currentUser,
-    databaseRef = firebase
-      .database()
-      .ref()
-      .child("archives");
+    databaseRef = firebase.database().ref().child("archives")
 
-  let profileArchives = "";
+  let profileArchives = ''
 
   const profileScripts = setInterval(() => {
-    if (d.readyState === "complete") {
-      clearInterval(profileScripts);
-      databaseRef.on("value", data => {
-        c(data, data.key, data.val());
-
+    if(d.readyState === 'complete') {
+      clearInterval(profileScripts)
+      databaseRef.on('value', data => {
         data.forEach(archive => {
-          if (archive.val().uid === user.uid) {
-            c(`archive name: `, archive.val().fileName);
-
+          if(archive.val().uid === user.uid) {
             profileArchives += `
-              <div class="subjects-content">
-                  <img src="${book}" class="subjects-content__img">
-                  <p class="profile-archives__name subjects-content__name"> ${archive.val()
-                    .fileName} </p>
-                  <a class="fa fa-download profile-archives__download subjects-content__name" href="${archive.val()
-                    .archiveURL}" download>  </a>
-                  <button class="fa fa-wrench profile-archives__update" id="profile-archives__update" key-update="${archive.key}"></button>
-                  <button class="fa fa-trash profile-archives__delete" key-delete="${archive.key}"></button>
-                  <p class="profile-archives__date subjects-content__date"> Fecha de subida: ${archive.val()
-                    .dateUpload} </p>
-                </div>
-                `;
+              <div class="archives-content">
+                  <img src="${book}" class="archives-content__img">
+                  <p class="profile-archives__name archives-content__name"> ${archive.val().fileName} </p>
+                  <div class="archives-content__actions">
+                    <a class="profile-archives__download" href="${archive.val().archiveURL}" download>  </a>
+                    <button class="profile-archives__update" id="profile-archives__update" key-update="${archive.key}"></button>
+                    <button class="profile-archives__delete" key-delete="${archive.key}"></button>
+                  </div>
+                  <p class="archives-content__date">Subido: ${archive.val().dateUpload} </p>
+                  <p class="archives-content__date">Asignatura: ${archive.val().subject} </p>
+                  <p class="archives-content__date">Profesor: ${archive.val().teacher} </p>
+              </div>
+                `
           }
         });
 
         d.querySelector(".profile-archives").innerHTML = profileArchives
 
         if (profileArchives !== "") {
-          let archivesToDelete = d.getElementsByClassName(
-            "profile-archives__delete"
-          );
+          let archivesToDelete = d.getElementsByClassName("profile-archives__delete")
           for (let i = 0; i < archivesToDelete.length; i++) {
             archivesToDelete[i].addEventListener("click", e => {
               if (confirm("¿Está seguro de borrar el archivo?") === true) {
@@ -66,15 +53,33 @@ const profile = () => {
             });
           }
 
-          let archivesToUpdate = d.getElementsByClassName(
-            "profile-archives__update"
-          );
+          let archivesToUpdate = d.getElementsByClassName("profile-archives__update")
+
           for (let i = 0; i < archivesToUpdate.length; i++) {
             archivesToUpdate[i].addEventListener("click", e => {
+
               let key = e.target.getAttribute("key-update");
               c("key", key);
               let refArchiveToUpdate = databaseRef.child(key)
               c("ref: ", refArchiveToUpdate);
+
+              let openFormUpdate = () => {
+                const formContainer = d.getElementById('uploader-update')
+                formContainer.classList.add('show-form')
+              }
+
+              let closeFormUpdate = () => {
+                const formContainer = d.getElementById('uploader-update')
+                formContainer.classList.remove('show-form')
+              }
+
+              archivesToUpdate[i].addEventListener('click', openFormUpdate)
+
+              /*let wrenchUpdateForm = d.getElementById('profile-archives__update')
+              wrenchUpdateForm.addEventListener('click', openFormUpdate)*/
+
+              let closeUpdateForm = d.getElementById('uploader-icon__close')
+              closeUpdateForm.addEventListener('click', closeFormUpdate)
 
               refArchiveToUpdate.once("value", data => {
                 let datos = data.val()
@@ -132,9 +137,10 @@ const profile = () => {
         ${signOut()}
         <h3 class="profile-title"> Tus archivos </h3>
         <aside class="profile-archives"> </aside>
-            <article class="uploader-update uploader">
+            <article class="uploader-update uploader" id="uploader-update">
             <h2 class="uploader-title"> Actualiza tus archivos ! </h2>
-            <img src="https://image.flaticon.com/icons/svg/148/148766.svg" class="main-nav__icon">
+            <img src="https://image.flaticon.com/icons/svg/148/148766.svg" class="main-nav__icon" id="uploader-icon__close">
+
             <form name="form-upload" id="form-upload__update" class="form-upload">
                 <input type="text" name="form-teacher" id="form-teacher__upload" class="form-upload__teacher" placeholder="Nombre del profesor" required>
 
