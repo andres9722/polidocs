@@ -83,15 +83,12 @@ const profile = () => {
 
               refArchiveToUpdate.once("value", data => {
                 let datos = data.val()
-                c("dataaaaaaaa:", datos)
                 d.getElementById("form-teacher__upload").value = datos.teacher
                 d.getElementById("form-upload__type__upload").value = datos.type
                 d.getElementById("form-upload__years__upload").value = datos.year
                 d.getElementById("form-upload__subject__upload").value = datos.subject
 
                 const storageRef = firebase.storage().ref().child("archives"),
-                  //databaseRef = firebase.database().ref().child("archives"),
-                  //user = firebase.auth().currentUser,
                   uploader = d.getElementById("form-uploader"),
                   form = d.getElementById("form-upload__update"),
                   output = d.querySelector(".uploader").querySelector(".progress-output")

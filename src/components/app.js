@@ -6,6 +6,7 @@ import nav from './nav'
 import timeline from './timeline'
 import subjects from './subjects'
 import profile from './profile'
+import timelineSubject from './timelineSubject'
 
 const app = () => (`
     ${header()}
@@ -15,7 +16,6 @@ const app = () => (`
         ${subjects()}
         ${profile()}
     </section>
-
 `)
 
 export default app

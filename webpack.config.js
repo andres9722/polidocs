@@ -13,7 +13,11 @@ module.exports = {
   devtool: 'hidden-source-map',
   entry: {
     script: './index.js',
-    another_script: './another.js'
+    matematicas_script: './matematicas.js',
+    calculo_diferencial_script: './calculo-diferencial.js',
+    calculo_integral_script: './calculo-integral.js',
+    calculo_varias_script: './calculo-varias.js',
+    ecuaciones_script: './ecuaciones.js'
   },
   output: {
     path: publicDir,
@@ -93,7 +97,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(srcDir, 'template.html'),
       filename: 'index.html',
-      title: 'Webpack Starter Kit - Vanilla JS',
+      title: 'polidocs',
       description: 'Bienvenid@s, esta aplicación fue construida con Webpack, Vanilla JS y la filosofía de los componentes web.',
       favicon: './assets/img/favicon.ico',
       hash: true,
@@ -105,8 +109,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(srcDir, 'template.html'),
-      filename: 'another.html',
-      title: 'Webpack Starter Kit - React',
+      filename: 'math.html',
+      title: 'polidocs | Matemáticas',
       description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
       favicon: './assets/img/favicon.ico',
       hash: true,
@@ -114,7 +118,59 @@ module.exports = {
         collapseWhitespace: true,
         removeComments: true
       },
-      chunks: ['another_script']
+      chunks: ['matematicas_script']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'template.html'),
+      filename: 'calculo-diferencial.html',
+      title: 'polidocs | Cálculo Diferencial',
+      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
+      favicon: './assets/img/favicon.ico',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      },
+      chunks: ['calculo_diferencial_script']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'template.html'),
+      filename: 'calculo-integral.html',
+      title: 'polidocs | Cálculo Integral',
+      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
+      favicon: './assets/img/favicon.ico',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      },
+      chunks: ['calculo_integral_script']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'template.html'),
+      filename: 'calculo-varias.html',
+      title: 'polidocs | Cálculo Varias Variables',
+      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
+      favicon: './assets/img/favicon.ico',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      },
+      chunks: ['calculo_varias_script']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(srcDir, 'template.html'),
+      filename: 'ecuaciones.html',
+      title: 'polidocs | Ecuaciones Diferenciales',
+      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
+      favicon: './assets/img/favicon.ico',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      },
+      chunks: ['ecuaciones_script']
     })
   ]
 }

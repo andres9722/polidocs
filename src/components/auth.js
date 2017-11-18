@@ -45,15 +45,12 @@ export const signOut = () => {
 
 export const isAuth = () => {
     firebase.auth().onAuthStateChanged(user => {
-        c(user)
         const polidocs = d.querySelector('.polidocs')
 
         if(user) {
             polidocs.innerHTML = app()
-            c('Usuario autenticado')
         } else {
             polidocs.innerHTML = signIn()
-            c('Usuario no autenticado')
         }
     })
 }

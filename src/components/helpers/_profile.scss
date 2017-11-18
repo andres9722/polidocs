@@ -38,7 +38,6 @@
   &-title {
     text-transform: uppercase;
     padding: 0.4em 0;
-    border-bottom: 0.2px solid rgba($font-color, 0.8);
     font: {
       size: 1.2em;
     }
@@ -56,9 +55,9 @@
     &::after {
       content: url("../../assets/img/svg/x-button.svg");
       position: absolute;
-      top: 50%;
-      left: -50%;
-      transform: translate(-50%, -50%);
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%);
       z-index: 50;
       width: 35px;
       height: 35px;
@@ -70,7 +69,7 @@
       content: url("../../assets/img/svg/settings.svg");
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 50%;
       transform: translate(-50%, -50%);
       z-index: 50;
       width: 35px;
@@ -82,9 +81,9 @@
     &::before {
       content: url("../../assets/img/svg/download.svg");
       position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 50%;
+      transform: translate(-50%);
       z-index: 10;
       width: 35px;
       height: 35px;
@@ -128,26 +127,33 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  border-bottom: 0.2px solid rgba($font-color, 0.8);
+  border-top: 0.2px solid rgba($font-color, 0.8);
   padding: 1em 0;
   text-align: left;
+  position: relative;
 
   &__img {
-    width: 20%;
+    width: auto;
     height: 60px;
   }
 
   &__name {
-    width: 50%;
+    width: 80%;
     font-size: 0.9em;
-    padding: 0 1.5em 0 .5em;
+    padding-left: 1em;
+    padding-right: 3em;
   }
 
   &__actions {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 30%;
+    flex-direction: column;
+    width: auto;
+    height: 120px;
+    position: absolute;
+    right: .5em;
+    top: 50%;
+    transform: translate(0, -50%);
   }
 
   &__date {

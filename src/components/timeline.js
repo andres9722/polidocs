@@ -14,7 +14,7 @@ const timeline = () => {
               return `
                 <div class="archives-content">
                   <img src="${book}" class="archives-content__img">
-                  <p class="subjects-content__name"> ${obj.fileName} </p>
+                  <p class="archives-content__name"> ${obj.fileName} </p>
                   <div class="archives-content__actions">
                     <a class="profile-archives__download" href="${obj.archiveURL}" download>  </a>
                   </div>
@@ -36,16 +36,14 @@ const timeline = () => {
             databaseRef.on('child_added', data => {
               timelineArchives.insertAdjacentHTML('afterbegin', ArchiveTemplate(data.val()))
             })
-
         }
     }, 100)
 
     return `
     <article class="timeline content-section u-show">
-        ${uploader()}
-        <aside class="timeline-archives">
-
-      </aside>
+      ${uploader()}
+      <h2 class="main-title">Últimos subidos</h2>
+      <aside class="timeline-archives"> </aside>
     </article>
 `}
 

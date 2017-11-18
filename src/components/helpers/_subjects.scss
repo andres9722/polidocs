@@ -33,3 +33,23 @@
 
     }
 }
+
+.timeline-subject {
+
+
+  &.show {
+    display: block;
+  }
+}
+
+.main-title {
+  text-align: center;
+}
+
+.Main {
+  text-align: center;
+  .uploader-form__submit {
+    display: inline-block;
+    margin-bottom: 2em;
+  }
+}
