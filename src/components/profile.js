@@ -4,6 +4,7 @@ import { signOut } from "./auth"
 import { progressBar, progressStatus, showProgress, hideProgress } from "./upload_progress"
 import { createCustomElement, printModal, removeModal } from "./modal"
 import book from "../assets/img/svg/chemistry.svg"
+import { errorMsg, successMsg } from "./helpers/messages"
 
 const profile = () => {
   const d = document,
@@ -31,6 +32,7 @@ const profile = () => {
                   <p class="archives-content__date">Subido: ${archive.val().dateUpload} </p>
                   <p class="archives-content__date">Asignatura: ${archive.val().subject} </p>
                   <p class="archives-content__date">Profesor: ${archive.val().teacher} </p>
+                  <p class="archives-content__date">Tipo: ${archive.val().type} </p>
               </div>
                 `
           }
@@ -57,11 +59,10 @@ const profile = () => {
 
           for (let i = 0; i < archivesToUpdate.length; i++) {
             archivesToUpdate[i].addEventListener("click", e => {
-
+              let output = d.getElementById('output-message')
+              output.innerHTML = "";
               let key = e.target.getAttribute("key-update");
-              c("key", key);
               let refArchiveToUpdate = databaseRef.child(key)
-              c("ref: ", refArchiveToUpdate);
 
               let openFormUpdate = () => {
                 const formContainer = d.getElementById('uploader-update')
@@ -75,9 +76,6 @@ const profile = () => {
 
               archivesToUpdate[i].addEventListener('click', openFormUpdate)
 
-              /*let wrenchUpdateForm = d.getElementById('profile-archives__update')
-              wrenchUpdateForm.addEventListener('click', openFormUpdate)*/
-
               let closeUpdateForm = d.getElementById('uploader-icon__close')
               closeUpdateForm.addEventListener('click', closeFormUpdate)
 
@@ -90,12 +88,10 @@ const profile = () => {
 
                 const storageRef = firebase.storage().ref().child("archives"),
                   uploader = d.getElementById("form-uploader"),
-                  form = d.getElementById("form-upload__update"),
-                  output = d.querySelector(".uploader").querySelector(".progress-output")
+                  form = d.getElementById("form-upload__update")
 
                 form.addEventListener("submit", event => {
                   event.preventDefault();
-                  output.innerHTML = "";
 
                   let teacher = d.getElementById("form-teacher__upload").value,
                     type = d.getElementById("form-upload__type__upload").value,
@@ -114,7 +110,10 @@ const profile = () => {
                     type: type,
                     year: years,
                     subject: subject
-                  });
+                  })
+                  .then(() =>  output.innerHTML = successMsg('Actualizado correctamente'))
+                  .catch((err) => c(err))
+
                 });
               });
             });
@@ -134,15 +133,17 @@ const profile = () => {
         ${signOut()}
         <h3 class="profile-title"> Tus archivos </h3>
         <aside class="profile-archives"> </aside>
+
             <article class="uploader-update uploader" id="uploader-update">
-            <h2 class="uploader-title"> Actualiza tus archivos ! </h2>
-            <img src="https://image.flaticon.com/icons/svg/148/148766.svg" class="main-nav__icon" id="uploader-icon__close">
+              <img src="https://image.flaticon.com/icons/svg/148/148766.svg" class="main-nav__icon" id="uploader-icon__close">
+              <h2 class="uploader-title"> Actualiza tus archivos</h2>
 
-            <form name="form-upload" id="form-upload__update" class="form-upload">
-                <input type="text" name="form-teacher" id="form-teacher__upload" class="form-upload__teacher" placeholder="Nombre del profesor" required>
+              <form name="form-upload" id="form-upload__update" class="form-upload">
+                <label for="form-teacher" class="uploader-form__input"> ¿Profesor? </label>
+                <input type="text" name="form-teacher" id="form-teacher__upload" class="input" placeholder="Nombre del profesor" required>
 
-                <h3 class="form-upload__what"> ¿Qué vas a subir? </h3>
-                <select class="form-upload__type" id="form-upload__type__upload" required>
+                <label for="form-upload__type__upload" class="uploader-form__input"> ¿Qué vas a subir? </label>
+                <select class="select" id="form-upload__type__upload" name="form-upload__type__upload" required>
                     <option value="Quiz #1">Quiz #1</option>
                     <option value="Quiz #2">Quiz #2</option>
                     <option value="Quiz #3">Quiz #3</option>
@@ -154,8 +155,8 @@ const profile = () => {
                     <option value="Otro">Otro</option>
                 </select>
 
-                <h3 class="form-upload__what"> ¿Materia? </h3>
-                <select class="form-upload__subject" id="form-upload__subject__upload" required>
+                <label for="form-upload__subject__upload"> ¿Asignatura? </label>
+                <select class="select" id="form-upload__subject__upload" name="form-upload__subject__upload" required>
                   <option value="Matemáticas">Matemáticas</option>
                   <option value="Cálculo Diferencial">Cálculo Diferencial</option>
                   <option value="Cálculo Integral">Cálculo Integral</option>
@@ -163,8 +164,8 @@ const profile = () => {
                   <option value="Ecuaciones Diferenciales">Ecuaciones Diferenciales</option>
                 </select>
 
-                <h3 class="form-upload__what"> ¿Año? </h3>
-                <select class="form-upload__period" id="form-upload__years__upload" required>
+                <label for="form-upload__years__upload"> ¿Año? </label>
+                <select class="select" id="form-upload__years__upload" name="form-upload__years__upload" required>
                     <option value="2010">2010</option>
                     <option value="2011">2011</option>
                     <option value="2012">2012</option>
@@ -175,11 +176,10 @@ const profile = () => {
                     <option value="2017">2017</option>
                 </select>
 
-                <input type="submit" id="form-submit" value="Actualizar">
+                <input type="submit" id="form-submit" class="uploader-form__submit" value="Actualizar">
             </form>
-            ${progressBar()}
+            <div id="output-message"></div>
           </article>
-          <div class="close" id="close">X</div>
         <div class="profile-update" id="profile-update"> </div>
     </article>
 `;

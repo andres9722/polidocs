@@ -60,6 +60,7 @@ const uploader = () => {
                         subject = d.getElementById("uploader-form__subject").value
 
                       saveArchiveInDB(url, user, file, date, teacher, type, years, subject)
+                      form.reset()
                     })
                     .catch(err => (output.innerHTML = errorMsg("Error", err)))
                 })
@@ -80,7 +81,7 @@ const uploader = () => {
           <label for="form-teacher" class="uploader-form__input"> ¿Profesor? </label>
           <input type="text" name="form-teacher" id="form-teacher" class="input" placeholder="Nombre del profesor" required>
 
-          <label form="uploader-form__type" class="uploader-form__input"> ¿Qué vas a subir? </label>
+          <label for="uploader-form__type" class="uploader-form__input"> ¿Qué vas a subir? </label>
           <select class="select" id="uploader-form__type" name="uploader-form__type" required>
             <option value="Quiz #1">Quiz #1</option>
             <option value="Quiz #2">Quiz #2</option>
