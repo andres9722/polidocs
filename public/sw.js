@@ -1,8 +1,13 @@
-const CACHE_NAME = "polidocs-cache-v1",
+const CACHE_NAME = 'polidocs-cache-v1',
   urlsToCache = [
     "./",
     "./?utm=homescreen",
     "./index.html",
+    "./matematicas.html",
+    "./calculo-diferencial.html",
+    "./calculo-integral.html",
+    "./calculo-varias.html",
+    "./ecuaciones.html",
     "./index.html?utm=homescreen",
     "./style.css",
     "./script.js",
@@ -49,20 +54,13 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   console.log("Evento: SW Recuperando");
   e.respondWith(
-    caches.match(e.request).then(res => {
+    caches.match(e.request)
+    .then(res => {
       if (res) {
         return res;
       }
 
-      return fetch(e.request).then(res => {
-        let resToCache = res.clone();
-        caches.open(cacheName).then(cache => {
-          cache
-            .put(request, resToCache)
-            .catch(err => console.log(`${request.url}: ${err.message}`));
-        });
-        return res;
-      });
+      return fetch(e.request)
     })
   );
 });

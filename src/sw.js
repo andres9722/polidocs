@@ -60,17 +60,7 @@ self.addEventListener("fetch", e => {
         return res;
       }
 
-      return fetch( e.request )
-      .then(res => {
-          let resToCache = res.clone();
-          caches.open(CACHE_NAME)
-              .then(cache => {
-                  cache
-                  .put(request, resToCache)
-                  .catch(err => console.log(`${request.url}: ${err.message}`));
-              });
-          return res;
-      })
+      return fetch(e.request)
     })
   );
 });

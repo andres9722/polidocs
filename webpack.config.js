@@ -35,7 +35,7 @@ module.exports = {
     historyApiFallback: true,
     compress: true,
     open: true,
-    port: 3006,
+    port: 4001,
     openPage: ''
   },
   module: {
@@ -113,7 +113,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.join(srcDir, 'template.html'),
-      filename: 'math.html',
+      filename: 'matematicas.html',
       title: 'polidocs | Matemáticas',
       description: 'Aplicación Web Progresiva',
       favicon: './assets/img/favicon.png',
