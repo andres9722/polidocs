@@ -1,4 +1,4 @@
-import { init } from './components/helpers/init'
+import { init, ga } from './components/helpers/init'
 import { isAuth } from './components/auth'
 
 init()
@@ -10,3 +10,5 @@ const app = `
 `
 
 document.getElementById('root').innerHTML = app
+
+ga()

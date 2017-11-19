@@ -3,10 +3,10 @@ import header from './components/header'
 import book from "./assets/img/svg/learning.svg";
 import css from './style.scss'
 import timelineSubject from './components/timelineSubject'
-import { init } from './components/helpers/init'
+import { init, pwa } from './components/helpers/init'
 
 init()
-
+pwa()
 
 const subjectPage = `
   ${header()}

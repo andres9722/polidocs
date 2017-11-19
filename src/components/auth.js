@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import app from './app'
 import sign from '../sign'
+import { pwa, isOnLine } from './helpers/init'
 
 const d = document, c = console.log
 
@@ -48,9 +49,12 @@ export const isAuth = () => {
         const polidocs = d.querySelector('.polidocs')
 
         if(user) {
-            polidocs.innerHTML = app()
+          polidocs.innerHTML = app()
+          pwa()
         } else {
-            polidocs.innerHTML = signIn()
+          polidocs.innerHTML = signIn()
         }
+
+        isOnLine()
     })
 }
