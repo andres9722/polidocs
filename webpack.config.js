@@ -1,3 +1,5 @@
+//import { request } from 'http';
+
 const webpack = require('webpack'),
   path = require('path'),
   glob = require('glob-all'),
@@ -6,7 +8,9 @@ const webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
-  PurifyCSSPlugin = require('purifycss-webpack')
+  PurifyCSSPlugin = require('purifycss-webpack'),
+  WebpackPwaManifest = require('webpack-pwa-manifest'),
+  CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: srcDir,
@@ -98,8 +102,8 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'index.html',
       title: 'polidocs',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, Vanilla JS y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
@@ -111,8 +115,8 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'math.html',
       title: 'polidocs | Matemáticas',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
@@ -124,8 +128,8 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'calculo-diferencial.html',
       title: 'polidocs | Cálculo Diferencial',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
@@ -137,8 +141,8 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'calculo-integral.html',
       title: 'polidocs | Cálculo Integral',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
@@ -150,8 +154,8 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'calculo-varias.html',
       title: 'polidocs | Cálculo Varias Variables',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
@@ -163,14 +167,37 @@ module.exports = {
       template: path.join(srcDir, 'template.html'),
       filename: 'ecuaciones.html',
       title: 'polidocs | Ecuaciones Diferenciales',
-      description: 'Bienvenid@s, esta aplicación fue construida con Webpack, React y la filosofía de los componentes web.',
-      favicon: './assets/img/favicon.ico',
+      description: 'Aplicación Web Progresiva',
+      favicon: './assets/img/favicon.png',
       hash: true,
       minify: {
         collapseWhitespace: true,
         removeComments: true
       },
       chunks: ['ecuaciones_script']
-    })
+    }),
+    new WebpackPwaManifest({
+      name: 'polidocs',
+      short_name: 'polidocs',
+      description: 'Aplicación Web Progresiva',
+      orientation: 'portrait',
+      display: 'standalone',
+      start_url: 'index.html?utm=homescreen',
+      scope: './',
+      lang: 'es',
+      background_color: '#007BDF',
+      theme_color: '#FF3C32',
+      icons: [
+        {
+          src: path.resolve('src/assets/img/rocket.png'),
+          sizes: [16,32,64,96,128,192,256,384,512,1024],
+          type: 'image/png'
+        }
+      ],
+      fingerprints: false
+    }),
+    new CopyWebpackPlugin([
+      { from : 'sw.js'}
+    ])
   ]
 }
