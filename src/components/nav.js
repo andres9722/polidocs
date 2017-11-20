@@ -19,9 +19,14 @@ const nav = () => {
 
           sections.forEach(section => {
             if(section.classList.contains(btnSection)) {
+              //nav.querySelector(`.${btnSection}-button`).classList.add('section-active')
+
               section.classList.add('u-show', 'u-fadein')
               section.classList.remove('u-hide')
             } else {
+
+              //nav.querySelector(`.${btnSection}-button`).classList.remove('section-active')
+
               section.classList.add('u-hide')
               section.classList.remove('u-show', 'u-fadein')
             }

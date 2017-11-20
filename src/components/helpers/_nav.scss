@@ -8,6 +8,16 @@
   .timeline-button, .subjects-button, .profile-button {
     width: 100%;
     border: 0;
+    font-size: 0.95em;
+
+    &.section-active {
+      background: red;
+    }
+
+    &.section-desactive {
+      background: white;
+    }
+
   }
 
   &__name {

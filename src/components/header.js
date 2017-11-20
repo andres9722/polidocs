@@ -1,4 +1,4 @@
-import book from '../assets/img/svg/scholarship.svg'
+import book from '../assets/img/svg/graduation.svg'
 
 const header = () => (`
     <header class="header">
