@@ -23,8 +23,24 @@ const timeline = () => {
                   <p class="archives-content__date"> Asignatura: ${obj.subject} </p>
                   <p class="archives-content__date"> Profesor: ${obj.teacher} </p>
                   <p class="archives-content__date"> Tipo: ${obj.type} </p>
+                  <a href="${obj.archiveURL}" class="sharing archives-content__date"> SHARE </a>
                 </div>
               `
+            }
+
+            if(navigator.share) {
+              d.querySelectorAll('a.sharing').forEach(el => {
+                el.addEventListener('click', e => {
+                  e.preventDefault()
+                  const url = this.href
+                  navigator.share({
+                    title: 'polidocs',
+                    text: 'Descarga tu archivo',
+                    url: url
+                  })
+                  return false
+                })
+              })
             }
 
             databaseRef.once('value', data => {
@@ -37,7 +53,7 @@ const timeline = () => {
               timelineArchives.insertAdjacentHTML('afterbegin', ArchiveTemplate(data.val()))
             })
         }
-    }, 100)
+    }, 50)
 
     return `
     <article class="timeline content-section u-show">
