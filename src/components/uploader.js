@@ -1,39 +1,47 @@
-import firebase from "firebase"
-import { progressBar, progressStatus, showProgress, hideProgress } from "./upload_progress"
-import { errorMsg, successMsg } from "./helpers/messages"
-import book from "../assets/img/png/formula.png"
-import upload from "../assets/img/svg/upload.svg"
-import { saveArchiveInDB } from "./helpers/archives_db"
+import firebase from "firebase";
+import {
+  progressBar,
+  progressStatus,
+  showProgress,
+  hideProgress
+} from "./upload_progress";
+import { errorMsg, successMsg } from "./helpers/messages";
+import book from "../assets/img/svg/certificate.svg";
+import upload from "../assets/img/svg/upload.svg";
+import { saveArchiveInDB } from "./helpers/archives_db";
 
 const uploader = () => {
   const d = document,
-    c = console.log
+    c = console.log;
 
   const uploaderScripts = setInterval(() => {
     if (d.readyState === "complete") {
-      clearInterval(uploaderScripts)
+      clearInterval(uploaderScripts);
       const storageRef = firebase.storage().ref().child("archives"),
         databaseRef = firebase.database().ref().child("archives"),
         user = firebase.auth().currentUser,
         uploader = d.getElementById("uploader-former"),
         form = d.getElementById("uploader-form"),
-        output = d.querySelector(".uploader").querySelector(".progress-output")
+        output = d.querySelector(".uploader").querySelector(".progress-output");
 
       uploader.addEventListener("change", e => {
         Array.from(e.target.files).forEach(file => {
-          output.innerHTML = ""
+          output.innerHTML = "";
 
-          if(file.type.match("image.*") || file.type.match("application/pdf") || file.type.match("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+          if ( file.type.match("image.*") ||
+            file.type.match("application/pdf") ||
+            file.type.match("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+
             form.addEventListener("submit", event => {
-              event.preventDefault()
-              output.innerHTML = ''
-              let uploadTask = storageRef.child(file.name).put(file)
+              event.preventDefault();
+              output.innerHTML = "";
+              let uploadTask = storageRef.child(file.name).put(file);
               uploadTask.on("state_changed", data => {
                   showProgress();
-                  progressStatus(data)
+                  progressStatus(data);
                 },
                 err => {
-                  output.innerHTML = errorMsg("Nombre de archivo no válido, elimina caracteres", err)
+                  output.innerHTML = errorMsg("Nombre de archivo no válido, elimina caracteres", err);
                 },
                 () => {
                   storageRef.child(file.name).getDownloadURL().then(url => {
@@ -45,33 +53,36 @@ const uploader = () => {
                               <a href="${url}" class="download-container__link" download> <ins> Descargar </ins> </a>
                           </div>
                         `
-                      )
+                      );
 
                       let dates = new Date(),
                         monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
                         day = dates.getDate(),
                         monthIndex = dates.getMonth(),
                         year = dates.getFullYear(),
-                        date = day + " " + monthNames[monthIndex] + " " + year
+                        date = day + " " + monthNames[monthIndex] + " " + year;
 
                       let teacher = d.getElementById("form-teacher").value,
                         type = d.getElementById("uploader-form__type").value,
                         years = d.getElementById("uploader-form__year").value,
-                        subject = d.getElementById("uploader-form__subject").value
+                        subject = d.getElementById("uploader-form__subject").value;
 
-                      saveArchiveInDB(url, user, file, date, teacher, type, years, subject)
-                      form.reset()
+                      let obj = {teacher, type, years, subject, date}
+
+                      saveArchiveInDB(url, user, file, obj);
+                      form.reset();
                     })
-                    .catch(err => (output.innerHTML = errorMsg("Error", err)))
-                })
-            })
+                    .catch(err => (output.innerHTML = errorMsg("Error", err)));
+                }
+              );
+            });
           } else {
-            output.innerHTML = errorMsg("Archivo no válido", null)
+            output.innerHTML = errorMsg("Archivo no válido", null);
           }
-        })
-      })
+        });
+      });
     }
-  }, 100)
+  }, 100);
 
   return `
     <article class="uploader">
@@ -115,7 +126,6 @@ const uploader = () => {
             <option value="2017">2017</option>
           </select>
 
-
           <input type="file" id="uploader-former" multiple required>
           <label for="uploader-former" class="uploader-cloud">
               <img src="${upload}" class="uploader-former__img" title="Sube tus archivos">
@@ -126,7 +136,7 @@ const uploader = () => {
         </form>
         ${progressBar()}
     </article>
-`
-}
+`;
+};
 
-export default uploader
+export default uploader;

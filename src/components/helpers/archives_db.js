@@ -1,18 +1,18 @@
 import firebase from 'firebase'
 
-export function saveArchiveInDB(url, user, file, date, teacher, type, years, subject) {
+export function saveArchiveInDB(url, user, file, obj) {
     firebase.database().ref().child('archives').push({
       archiveURL: url,
       fileName: file.name,
       fileType: file.type,
-      dateUpload: date,
+      dateUpload: obj.date,
       uid: user.uid,
       displayName: user.displayName,
       avatar: user.photoURL,
-      teacher: teacher,
-      type: type,
-      year: years,
-      subject: subject
+      teacher: obj.teacher,
+      type: obj.type,
+      year: obj.years,
+      subject: obj.subject
     })
 }
 

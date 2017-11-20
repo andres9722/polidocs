@@ -1,14 +1,14 @@
-import { init, ga } from './components/helpers/init'
-import { isAuth } from './components/auth'
+import { init, ga } from "./components/helpers/init";
+import { isAuth } from "./components/auth";
 
-init()
+init();
 
 const app = `
   <main class="polidocs">
     ${isAuth()}
   </main>
-`
+`;
 
-document.getElementById('root').innerHTML = app
+document.getElementById("root").innerHTML = app;
 
-ga()
+ga();

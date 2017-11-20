@@ -1,4 +1,4 @@
-const CACHE_NAME = 'polidocs-cache-v1',
+const CACHE_NAME = "polidocs-cache-v1",
   urlsToCache = [
     "./",
     "./?utm=homescreen",
@@ -54,13 +54,12 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   console.log("Evento: SW Recuperando");
   e.respondWith(
-    caches.match(e.request)
-    .then(res => {
+    caches.match(e.request).then(res => {
       if (res) {
         return res;
       }
 
-      return fetch(e.request)
+      return fetch(e.request);
     })
   );
 });

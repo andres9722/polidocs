@@ -1,8 +1,8 @@
-import css from './style.scss'
-import icon from './assets/img/svg/graduates-2.svg'
-import gmail from './assets/img/svg/gmail.svg'
+import css from "./style.scss";
+import icon from "./assets/img/svg/graduates-2.svg";
+import gmail from "./assets/img/svg/gmail.svg";
 
-const signIn = () => (`
+const signIn = () => `
   <div class="sign">
     <img src=${icon} class="sign-img">
     <h1 class="sign-title"> polidocs </h1>
@@ -12,6 +12,6 @@ const signIn = () => (`
       <img src=${gmail} class="sign-gmail">
     </button>
   </div>
-`)
+`;
 
-export default signIn
+export default signIn;
